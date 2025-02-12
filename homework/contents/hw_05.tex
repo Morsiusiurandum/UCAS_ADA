@@ -1,0 +1,28 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+    \textbf{证明:} 对于含有\(n\)个内节点的二元树,
+    证明\(E=2n+I\).其中\(E,I\)分别为外部和内部路径长度。
+\end{problem}
+
+
+\begin{solution}
+    使用数学归纳法证明.
+    \begin{enumerate}
+        \item 当\(n=1\)时, 易知\(E=2, I=0\), 所以\(E=I+2n\)成立; 
+        \item 假设\(n \le k\)时,\( E=I+2n\)成立; 
+        当\(n=k\)时, 假定找到某个内结点\(x\)为叶结点, 设该结点的层数为\(h\), 
+        将结点\(x\)及其左右子结点(外结点)从原树中摘除, 替换为一个新的外结点, 生成新二元树.
+        
+        此时新二元扩展树内部结点数为\(n^{'} = k - 1\), 
+        内部路径长度\(E^{'} = E-2(h+1)+h\), 
+        外部路径长度\(I^{'} = I-h\)
+        且满足\(E^{'}=I^{'}+2n^{'}\).
+        
+        带入上式中后可得\(E-2h-2+h=2n-2+I-h\), 
+        即\(E=2n+I\).
+    \end{enumerate}
+证毕.
+\end{solution}
+\end{document}

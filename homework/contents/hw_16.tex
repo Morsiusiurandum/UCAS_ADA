@@ -1,0 +1,75 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{State}=[circle, draw, thick]
+
+\begin{problem}
+    下面的有向图中，利用算法 SHORTEST-PATHS 获按照长度非降次序排列的由结点到其余结点的最短径长度。
+    \begin{itemize}
+        \item [(1)] 将结点 s 作为源点，计算其到其余结点的最短路径长度
+        \item [(2)] 将结点 z 作为源点，计算其到其余结点的最短路径长度。
+    \end{itemize}
+\end{problem}
+\begin{center}
+\begin{tikzpicture}
+% Nodes
+\node[State] (y) at ( 0  , 0) {y};
+\node[State] (t) at (0,2) {t};
+\node[State] (x) at (2,2) {x};
+\node[State] (z) at (2,0) {z};
+\node[State] (s) at (-1.7,1) {s};
+% Edges with weights
+\draw[->,thick] (t) -- (x) node[midway, above]  {6};
+
+\draw[->,thick] (x.280) -- (z.80) node[midway, left]  {7};
+\draw[->,thick] (z.100) -- (x.260) node[midway, right]  {2};
+
+\draw[->,thick] (s) -- (t) node[midway, above left]  {3};
+\draw[->,thick] (s) -- (y) node[midway, below left]  {5};
+
+\draw[->,thick] (y.100) -- (t.260)node[midway, left]  {1};
+\draw[->,thick] (t.280) -- (y.80)node[midway, right]  {2};
+
+\draw[->,thick] (y) -- (z) node[midway, below]  {6};
+\draw[->,thick] (z) -- (s) node[midway, above ,pos=0.2]  {3};
+\draw[->,thick] (y) -- (x) node[midway, above]  {4};
+\end{tikzpicture}
+\end{center}
+
+\begin{solution}
+\begin{itemize}
+    \item [(1)] 将结点 s 作为源点，计算其到其余结点的最短路径长度
+    \begin{table}[ht!]
+      \begin{center}
+        \begin{tabular}{c|c|l|c c c c c} 
+        \multirow{2}{*}{\textbf{迭代}} & \multirow{2}{*}{\textbf{选取的结点}} & \multirow{2}{*}{\textbf{S}} & \multicolumn{5}{c}{\textbf{DIST}} \\
+        & & & (s) &(x) & (t) & (y) & (z)\\
+        \hline
+        初置值 & - &s            & 0 & \(\infty\) & 3 & 5 & \(\infty\) \\
+        1      & t &s, t         & 0 & 9          & 3 & 5 & \(\infty\) \\
+        2      & y &s, t, y      & 0 & 9          & 3 & 5 & 11         \\
+        3      & x &s, t, y, x   & 0 & 9          & 3 & 5 & 11         \\
+        4      & z &s, t, y, x, z& 0 & 9          & 3 & 5 & 11         \\
+        \end{tabular}
+      \end{center}
+    \end{table}
+    \item [(2)] 将结点 z 作为源点，计算其到其余结点的最短路径长度。
+    \begin{table}[h!]
+      \begin{center}
+        \begin{tabular}{c|c|l|c c c c c} 
+        \multirow{2}{*}{\textbf{迭代}} & \multirow{2}{*}{\textbf{选取的结点}} & \multirow{2}{*}{\textbf{S}} & \multicolumn{5}{c}{\textbf{DIST}} \\
+        & & & (s) &(x) & (t) & (y) & (z)\\
+        \hline
+        初置值 & - & z             & 3 & 7 & \(\infty\) & \(\infty\) & 0 \\
+        1      & s & z, s          & 3 & 7 &  6         &        8   & 0 \\
+        2      & t & z, s, t       & 3 & 7 &  6         &    8       & 0 \\
+        3      & x & z, s, t, x    & 3 & 7 &   6        &     8      & 0 \\
+        4      & y & z, s, t, x, y & 3 & 7 &    6       &     8      & 0 \\
+        \end{tabular}
+      \end{center}
+    \end{table}
+\end{itemize}
+
+\end{solution}
+  
+\end{document}

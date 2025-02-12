@@ -1,0 +1,53 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+某工业生产部门根据国家计划的安排, 拟将某种高效率的 5 台机器, 分别分配给 A , B , c 三个工厂,各工厂在获得不同数量的这种机器后,
+可以为国家盈利如下表所示.请找出一种 5 台机器的分配方式, 使得这 5台机器盈利最大.
+\end{problem}
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+          & 0  & 1  & 2  & 3   & 4   & 5   \\  \hline
+        A & 0万 & 3万 & 7万 & 9 万 & 12万 & 13万 \\ \hline
+        B & 0万 & 5万 & 8万 & 10万 & 11万 & 12万 \\ \hline
+        C & 0万 & 4万 & 6万 & 11万 & 12万 & 12万 \\ \hline
+    \end{tabular}
+\end{table}
+\begin{solution}
+    先求出\(j\)个机器在A, B(前两个)工厂分配时的最佳盈利情况, 再求出n个机器在A, B, C(前三个工厂)分配时最佳的盈利情况.
+    将 A, B, C 三个工厂按顺序编号. 设$dp[i][j]$表示i个机器分配给前\(j\)工厂个时的最佳盈利情况.
+    那么有:
+    \begin{equation*}
+        dp[i][j] = \max_{k=0}^{j}\left\{dp[i-1][j-k]+p[i][k]\right\}
+    \end{equation*}
+    即\(j\)个机器分配给前3个工厂时的最佳盈利情况等于\(j-k\)个机器分配给前2个工厂的最佳盈利情况加上\(k\)个机器分配给第3个工厂的盈利情况.\\
+    且\(j\)个机器分配给前2个工厂时的最佳盈利情况等于\(j-k\)个机器分配给前1个工厂的最佳盈利情况加上\(k\)个机器分配给第2个工厂的盈利情况.\\
+    且容易写出边界条件:
+    \begin{equation*}
+        dp[1][j] = p[1][j]
+    \end{equation*}
+    即:
+    \begin{equation*}
+        \begin{cases}
+            dp[i][j] = \max\left\{dp[i-1][j-k]+p[i][k]\right\} \\
+            dp[1][j] = p[1][j]
+        \end{cases}
+    \end{equation*}
+    其中\(p[i][j]\)即为表中的盈利情况.
+    容易计算得表如下, 数字后的括号代表分配顺序:
+    \begin{table}[h]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+            \hline
+            \(dp[i][j]\) & 0        & 1        & 2        & 3         & 4         & 5         \\ \hline
+            1            & 0(0,-,-) & 3(1,-,-) & 7(2,-,-) & 9(3,-,-)  & 12(4,-,-) & 13(5,-,-) \\ \hline
+            2            & 0(0,0,-) & 5(0,1,-) & 8(1,1,-) & 12(2,1,-) & 15(2,2,-) & 17(4,1,-) \\ \hline
+            3            & 0(0,0,0) & 5(0,1,0) & 9(0,1,1) & 12(2,1,0) & 16(2,1,1) & 19(2,2,1) \\ \hline
+        \end{tabular}
+    \end{table}
+    \\
+    可得最大盈利为19, 分配方式\((A,B,C)\)为\((2,2,1)\)或\((1,1,3)\)或\((0,2,3)\).
+\end{solution}
+\end{document}

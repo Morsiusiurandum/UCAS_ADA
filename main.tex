@@ -1,0 +1,37 @@
+\documentclass{main}
+\usepackage{subfiles}
+
+\title{{\Huge{\textbf{算法设计与分析 习题}}}}
+\author{\defaultauthor}
+\date{\today}
+
+\begin{document}
+\makeatletter
+% 封面页自定义
+\newpage
+\begin{titlepage}
+    \centering
+    \vfill
+    {\@title \\[1cm]}  % 标题
+    {\Large Homework of Algorithm Design and Analysis \\[2cm]}  % 副标题
+    \vfill  % 插入弹性空间，推到页面底部
+    {\Large\textit{\@author}} \\  % 姓名
+    {\large \@date}  % 日期
+\end{titlepage}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+
+
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{1}
+\tableofcontents
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\subfile{homework/homework.tex}
+\subfile{project/project.tex}
+
+\end{document}

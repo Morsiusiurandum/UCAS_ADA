@@ -1,0 +1,59 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+在定集合 $S :{ 3 , 7 , 5 , 9 }$, C= 20 ,近似参数 0.2 ,写出似算法求解子集和问题的过程.
+\end{problem}
+
+\begin{solution}
+修正参数为
+\begin{equation*}
+    \sigma = \frac{\epsilon}{n} = 0.05
+\end{equation*}
+
+\subsection*{加入 $3$}
+\begin{align*}
+    L' & = \{0 + 3\} = \{3\}    \\
+    L  & = L \cup L' = \{0, 3\}
+\end{align*}
+
+\subsection*{加入 $7$}
+\begin{align*}
+    L' & = \{0 + 7, 3 + 7\} = \{7, 10\} \\
+    L  & = L \cup L' = \{0, 3, 7, 10\}
+\end{align*}
+
+\subsection*{加入 $5$}
+\begin{align*}
+    L' & = \{0 + 5, 3 + 5, 7 + 5, 10 + 5\} = \{5, 8, 12, 15\} \\
+    L  & = L \cup L' = \{0, 3, 5, 7, 8, 10, 12, 15\}
+\end{align*}
+修剪：按照 $\delta \times C = 4$ 的规则保留：
+\(
+    L = \{0, 5, 10, 15\}
+\)
+
+\subsection*{加入 $9$}
+\begin{align*}
+    L' & = \{0 + 9, 5 + 9, 10 + 9, 15 + 9\} = \{9, 14, 19, 24\} \\
+    L  & = L \cup L' = \{0, 5, 10, 15, 9, 14, 19, 24\}
+\end{align*}
+修剪：按照 $\delta \times C = 4$ 的规则保留：
+\(
+    L = \{0, 5, 10, 15, 19\}
+\)
+
+\subsection*{剪枝}
+移除 $L$ 中大于 $C = 20$ 的元素，得到：
+\(
+    L = \{0, 5, 10, 15, 19\}
+\)
+
+\subsection*{最终解}
+列表中最大值为 $19$，对应的近似解子集为：
+\[
+    \{3, 7, 9\}
+\]
+
+\end{solution}
+\end{document}

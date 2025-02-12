@@ -1,0 +1,45 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+    在 \verb|PARTITION(m,p)| 中,将语句 \verb|if i<P| 改为 \verb|if i <= p| ,有何优缺点？
+
+    在数据集 \verb|(5,4,3,2,5,8,9)| 上执行这两个算法, 看看他们在执行时有何不同.
+\end{problem}
+\begin{solution}
+
+\verb|PARTITION| 函数的作用是将数组分成两部分:小于或等于某个基准值( \verb|pivot| )的元素放在一边,大于该基准值的元素放在另一边.
+快速排序在 \verb|PARTITION| 函数中遍历数组,用一个指针 \verb|i| 来确定分区位置,并比较 \verb|A[i]| 与基准值 \verb|pivot| ,然后决定 \verb|A[i]| 的位置.
+
+~\\
+由于 \verb|p| 给出的是最终 \verb|pivot|的位置:
+
+在原逻辑 \verb|if i < P| 下,当 \verb|p| 和 \verb|i| 相邻时就会停止判断,
+在修改后的逻辑 \verb|if i <= P| 下,当 \verb|p| 和 \verb|i| 等于或大于后才停止判断, 会带来多余的步骤.
+
+~\\
+优缺点分析:
+\begin{itemize}
+    \item 优点: \verb|if i <= P| 的逻辑可以确保 \verb|i| 和 \verb|p| 在相等时也会交换，可能带来更严格的边界处理
+    \item 缺点: 会在 \verb|i == p| 的情况下产生自我交换，带来不必要的计算，可能影响效率
+\end{itemize}
+
+数据集示例 \verb|(5,4,3,2,5,8,9)|:
+
+使用 \verb|if i < p|, 假设基准值 \verb|pivot| 选为数组的第一个元素, 即 \verb|5|.
+
+按照 \verb|if i < P| 的逻辑:
+\begin{itemize}
+    \item [1.] 开始时基准值 \verb|pivot = 5|.
+    \item [2.] 遍历数组,直到\verb|i >= p|
+    \item [3.] 最终分区结果: \verb|(5,4,3,2) (5) (8,9)|.
+\end{itemize}
+
+同样的操作,但使用 \verb|if i <= p|:
+\begin{itemize}
+\item [1.] 开始时基准值 \verb|pivot = 5|.
+\item [2.] 遍历数组,遍历数组,直到\verb|i > p|,可以看到相比原算法多比较一次.
+\item [3.] 最终分区结果: \verb|(5,4,3,2) (5) (8,9)|.
+\end{itemize}
+\end{solution}
+\end{document}

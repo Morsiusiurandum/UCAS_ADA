@@ -1,0 +1,25 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+硬件厂商XYZ公司宣称他们最新研制的微处理器运行速度为其竞争对手ABC公司的同类产品的100倍.
+对于计算机复杂性分别为 $n , n^2 , n^3$ 和 $n!$ 的各算法,
+若用ABC公司的计算机在1h内分别能解输入规模为 $n$ 问题,
+那么用XYZ公司的计算机在1h内分别能解输入规模为多大的问题?
+\end{problem}
+
+
+\begin{solution}
+
+    设 ABC 公司研制的微型处理器的运算速度为 $x$ ,
+    则 XYZ 公司研制的微型处理器的运算速度为 $100x$ .
+    令 XYZ 公司的计算机在1h内分别能解的问题规模为 $n'$ .
+    \begin{enumerate}
+        \item 当计算复杂性为$n$时,有 $n' = 100n$
+        \item 当计算复杂性为$n^2$时,有 ${n'}^2 = 100{n}^2$ ,即 $n' = 10n$
+        \item 当计算复杂性为$n^3$时,有 ${n'}^3 = 100{n}^3$ ,即 $n' = \sqrt[3]{100}n\approx{4.64n}$
+        \item 当计算复杂性为$n!$时,有 ${n'}! = 100{n}!$ ,当 $n$ 与 $n'$ 足够大时有 $n′ \approx {n}$
+    \end{enumerate}
+
+\end{solution}
+\end{document}

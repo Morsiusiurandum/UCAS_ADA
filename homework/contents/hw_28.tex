@@ -1,0 +1,55 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+假设在文本 "ababcabccabccacbab" 中查找模式 "abccac",分别写出采用 \texttt{BF} 算法和 \texttt{KMP} 算法的串匹配过程.
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item \texttt{BF} 算法的串匹配过程如下:
+              \begin{longtable}{|c|c|c|c|}
+                  \hline
+                  \textbf{开始位置} & \textbf{当前窗口}               & \textbf{比较过程}                                           & \textbf{结果} \\
+                  \hline
+                  0             & \texttt{ababcabccabccacbab} & \texttt{a == a, b == b, c != a}                         & 不匹配，右移1位    \\
+                  \hline
+                  1             & \texttt{babcabccabccacbab}  & \texttt{b != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  2             & \texttt{abcabccabccacbab}   & \texttt{a == a, b == b, c == c, c != a}                 & 不匹配，右移1位    \\
+                  \hline
+                  3             & \texttt{bcabccabccacbab}    & \texttt{b != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  4             & \texttt{cabccabccacbab}     & \texttt{c != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  5             & \texttt{abccabccacbab}      & \texttt{a == a, b == b, c == c, c != a}                 & 不匹配，右移1位    \\
+                  \hline
+                  6             & \texttt{bccabccacbab}       & \texttt{b != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  7             & \texttt{ccabccacbab}        & \texttt{c != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  8             & \texttt{cabccacbab}         & \texttt{c != a}                                         & 不匹配，右移1位    \\
+                  \hline
+                  9             & \texttt{abccacbab}          & \texttt{a == a, b == b, c == c, c == c, a == a, c == c} & 匹配成功        \\
+                  \hline
+              \end{longtable}
+        \item \texttt{KMP} 算法的串匹配过程如下:
+
+              串的\texttt{next}数组为: \texttt{[0, 0, 0, 0, 1]}
+              \begin{longtable}{|c|c|c|c|}
+                  \hline
+                  \textbf{开始位置} & \textbf{当前窗口}               & \textbf{比较过程}                                           & \textbf{结果}        \\
+                  \hline
+                  0             & \texttt{ababcabccabccacbab} & \texttt{a == a, b == b, c != a}                         & \texttt{next[2]=0} \\
+                  \hline
+                  1             & \texttt{abcabccabccacbab}   & \texttt{a == a, b == b, c == c, c != a}                 & \texttt{next[2]=0} \\
+                  \hline
+                  2             & \texttt{abccabccacbab}      & \texttt{a == a, b == b, c == c, c == c, a == a, c != b} & \texttt{next[5]=1} \\
+                  \hline
+                  3             & \texttt{bccacbab}           & \texttt{b == b, c == c, c == c, a == a, c == c}         & 完成匹配               \\
+                  \hline
+              \end{longtable}
+    \end{enumerate}
+\end{solution}
+
+\end{document}

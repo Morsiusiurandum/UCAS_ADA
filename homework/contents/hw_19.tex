@@ -1,0 +1,110 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{Node_Default}=[circle, draw, thick]
+\tikzstyle{Edge_Default}=[->, thick]
+\begin{problem}
+    求下面两个图里面每对顶点之间的最短路径:
+\end{problem}
+\begin{center}
+\begin{tikzpicture}
+\node[Node_Default] (A1) at ( 0 , 2 ) {1};
+\node[Node_Default] (B1) at ( 2 , 2 ) {2};
+\node[Node_Default] (C1) at ( 4 , 2 ) {3};
+
+\node[Node_Default] (D1) at ( 0 , 0 ) {4};
+\node[Node_Default] (E1) at ( 2 , 0 ) {5};
+\node[Node_Default] (F1) at ( 4 , 0 ) {6};
+
+\node[Node_Default] (A2) at ( 6  , 2 ) {1};
+\node[Node_Default] (B2) at ( 8  , 2 ) {2};
+\node[Node_Default] (C2) at ( 10 , 2 ) {3};
+
+\node[Node_Default] (D2) at ( 6 , 0 ) {4};
+\node[Node_Default] (E2) at ( 8 , 0 ) {5};
+\node[Node_Default] (F2) at ( 10, 0 ) {6};
+
+\draw[Edge_Default] (A1) -- (E1) node[pos=0.8, above] {1};
+\draw[Edge_Default] (B1) -- (A1) node[pos=0.5, above] {1};
+\draw[Edge_Default] (B1) -- (D1) node[pos=0.2, above] {2};
+\draw[Edge_Default] (C1) -- (B1) node[pos=0.5, above] {2};
+\draw[Edge_Default] (C1.280) -- (F1.80) node[pos=0.5, right] {8};
+\draw[Edge_Default] (D1) -- (A1) node[pos=0.5, left] {4};
+\draw[Edge_Default] (D1) -- (E1) node[pos=0.5, below] {3};
+\draw[Edge_Default] (E1) -- (B1) node[pos=0.5, right] {7};
+\draw[Edge_Default] (F1) -- (B1) node[pos=0.4, left] {5};
+\draw[Edge_Default] (F1.100) -- (C1.260) node[pos=0.5, left] {10};
+
+\draw[Edge_Default] (A2) -- (E2) node[pos=0.8, above] {-1};
+\draw[Edge_Default] (B2) -- (A2) node[pos=0.5, above] {1};
+\draw[Edge_Default] (B2) -- (D2) node[pos=0.2, above] {2};
+\draw[Edge_Default] (C2) -- (B2) node[pos=0.5, above] {2};
+\draw[Edge_Default] (C2.280) -- (F2.80) node[pos=0.5, right] {-8};
+\draw[Edge_Default] (D2) -- (A2) node[pos=0.5, left] {-4};
+\draw[Edge_Default] (D2) -- (E2) node[pos=0.5, below] {3};
+\draw[Edge_Default] (E2) -- (B2) node[pos=0.5, right] {7};
+\draw[Edge_Default] (F2) -- (B2) node[pos=0.4, left] {5};
+\draw[Edge_Default] (F2.100) -- (C2.260) node[pos=0.5, left] {10};
+\end{tikzpicture}
+\end{center}
+\begin{solution}
+    \begin{itemize}
+        \item [图1:]
+        可以写出其邻接矩阵:
+        \[
+        \begin{bmatrix}
+            0      & \infty & \infty & \infty & 1      & \infty \\
+            1      & 0      & \infty &  2     & \infty & \infty \\
+            \infty & 2      & 0      & \infty & \infty & 8      \\
+            4      & \infty & \infty & 0      & 3      & \infty \\
+            \infty & 7      & \infty & \infty & 0      & \infty \\
+            \infty & 5      & 10     & \infty & \infty & 0
+        \end{bmatrix}
+        \]
+        计算下一个矩阵的公式为:
+        \[
+        A^{k+1}_{ij} = \min \{ A^k_{ij}, A^k_{ik} + A^k_{kj} \}
+        \]
+        以此可算出\(A^1 - A^6\),选取对应的最短路径, 得到最终的距离矩阵:
+        \[
+        A = 
+        \begin{bmatrix}
+            0& 8& \infty& 10& 1& \infty \\
+            1& 0& \infty& 2& 2& \infty \\
+            3& 2& 0& 4& 4& 8 \\
+            4& 10& \infty& 0& 3& \infty \\
+            8& 7& \infty& 9& 0& \infty \\
+            6& 5& 10& 7& 7& 0 \\
+        \end{bmatrix}
+        \]
+        \item [图2:]
+        可以写出其邻接矩阵:
+        \[
+        \begin{bmatrix}
+            0      & \infty & \infty & \infty & -1     & \infty \\
+            1      & 0      & \infty &  2     & \infty & \infty \\
+            \infty & 2      & 0      & \infty & \infty & -8      \\
+            -4      & \infty & \infty & 0     &  3     & \infty \\
+            \infty & 7      & \infty & \infty & 0      & \infty \\
+            \infty & 5      & 10     & \infty & \infty & 0
+        \end{bmatrix}
+        \]
+        计算下一个矩阵的公式为:
+        \[
+        A^{k+1}_{ij} = \min \{ A^k_{ij}, A^k_{ik} + A^k_{kj} \}
+        \]
+        以此可算出\(A^1 - A^6\),选取对应的最短路径, 得到最终的距离矩阵:
+        \[
+        A =
+        \begin{bmatrix}
+            0& 6& \infty& 8& -1& \infty \\
+            -2& 0& \infty& 2& -3& \infty \\
+            -5& -3& 0& -1& -6& -8 \\
+            -4& 2& \infty& 0& -5& \infty \\
+            5& 7& \infty& 9& 0& \infty \\
+            3& 5& 10& 7& 2& 0 \\
+        \end{bmatrix}
+        \]
+    \end{itemize}
+\end{solution}
+\end{document}

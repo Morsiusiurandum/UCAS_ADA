@@ -1,0 +1,41 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+
+\begin{problem}
+\begin{equation*}
+    \max Z = 3x_1+2x_2-\frac{1}{8}x_3
+\end{equation*}
+\begin{align*}
+    x_1+x_2+x_3   & \leq 10 \\
+    2x_1+x_2+3x_3 & \leq 20 \\
+    x_1,x_2,x_3   & \geq 0
+\end{align*}
+\end{problem}
+
+\begin{solution}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|ccccccc}
+            \hline
+                    & \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(x_5\) & \(x_6\) & \(b\) \\
+            \(x_4\) & -1      & 2       & 3       & 1       & 0       & 0       & 4     \\
+            \(x_5\) & 4       & 0       & -2      & 0       & 1       & 0       & 12    \\
+            \(x_6\) & 3       & 8       & 4       & 0       & 0       & 1       & 10    \\
+            C       & 3       & 2       & 1/8     & 0       & 0       & 0       & 0     \\
+            \hline
+            \(x_4\) & 0       & 2       & 5/2     & 1       & 1/4     & 0       & 7     \\
+            \(x_1\) & 1       & 0       & -1/2    & 0       & 1/4     & 0       & 3     \\
+            \(x_6\) & 0       & 8       & 11/2    & 0       & -3/4    & 1       & 1     \\
+            C       & 0       & 2       & 11/8    & 0       & -3/4    & 0       & -9    \\
+            \hline
+            \(x_4\) & 0       & 0       & 9/8     & 1       & 7/16    & -1/4    & 27/4  \\
+            \(x_1\) & 1       & 0       & -1/2    & 0       & 1/4     & 0       & 3     \\
+            \(x_2\) & 0       & 1       & 11/6    & 0       & -3/32   & 1/8     & 1/8   \\
+            C       & 0       & 0       & 0       & 0       & -9/16   & -1/4    & -37/4 \\
+            \hline
+        \end{tabular}
+    \end{table}
+    最优解为 \(x_1 = 3, x_2 = 1/8, x_3 = 0, Z = 37/4\)
+\end{solution}
+\end{document}

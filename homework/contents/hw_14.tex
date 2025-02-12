@@ -1,0 +1,78 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+
+\begin{problem}
+字符 a ~ h 的出现频率恰好是前 8 个斐波那契数。
+\begin{itemize}
+    \item 求他们的 Huffman 编码。
+    \item 将结果推广到 n 个字符的频率恰好是前 n 个斐波那契数的情况。
+\end{itemize}
+\end{problem}
+\begin{solution}
+
+前 8 个斐波那契数为\verb|1,1,2,3,5,8,13,21|
+
+Huffman哈夫曼编码树为:
+
+\verb|                            [54]             |
+
+\verb|                          0/   1\            |
+
+\verb|                        [33]    [h:21]       |
+  
+\verb|                      0/   1\                |
+      
+\verb|                   [20]     [g:13]           |
+        
+\verb|                 0/   1\                     |
+        
+\verb|              [12]     [f:8]                 |
+        
+\verb|            0/   1\                          |
+        
+\verb|          [7]     [e:5]                      |
+        
+\verb|        0/  1\                               |
+        
+\verb|      [4]    [d:3]                           |
+        
+\verb|    0/  1\                                   |
+        
+\verb|   [2]   [c:2]                               |
+        
+\verb| 0/  1\                                      |
+        
+\verb|[a:1] [b:1]                                  |
+
+所以:
+
+a的编码为:\verb|0000000|
+
+b的编码为:\verb|0000001|
+
+c的编码为:\verb|000001|
+
+d的编码为:\verb|00001|
+
+e的编码为:\verb|0001|
+
+f的编码为:\verb|001|
+
+g的编码为:\verb|01|
+
+h的编码为:\verb|1|
+
+推广到n个字符:
+\[
+\begin{aligned}
+&\text{第 1 个字符:} \quad \underbrace{0 \, 0 \, \cdots \, 0}_{n-1 \text{ 个 0}}, \\
+&\text{第 2 个字符:} \quad \underbrace{0 \, 0 \, \cdots \, 0}_{n-2 \text{ 个 0}} \, 1, \\
+&\text{第 3 个字符:} \quad \underbrace{0 \, 0 \, \cdots \, 0}_{n-3 \text{ 个 0}} \, 1, \\
+&\quad \vdots \\
+&\text{第 } (n-1) \text{ 个字符:}  0 \, 1, \\
+&\text{第 n 个字符:}  1
+\end{aligned}
+\]
+\end{solution}
+\end{document}

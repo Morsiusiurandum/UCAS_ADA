@@ -1,0 +1,59 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+在图灵机中，设 B 表示空格， \(q_0\) 表示图灵机的初始状，表示图灵机的终止状态，
+\begin{enumerate}
+    \item 如果工作带上的信息为 B10100010B ，读写头对准最右边第一个为 0 的单元，则按照下指令执行后，得到的结果是什么？
+    \item 如果工作带上的信息为 B10100011B ，读写头对准右边第一个为 1 的单元，则执行指令后得到的结果是什么？
+\end{enumerate}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{ccc}
+        \((q_0 \, 0 \, 1 \, L \, q_1)\) & \((q_0 \, 1 \, 0 \, L \, q_2)\) & \((q_0 \, B \, B \, H \, q_F)\) \\
+        \((q_1 \, 0 \, 0 \, L \, q_1)\) & \((q_1 \, 1 \, 1 \, L \, q_1)\) & \((q_1 \, B \, B \, H \, q_F)\) \\
+        \((q_2 \, 0 \, 1 \, L \, q_1)\) & \((q_2 \, 1 \, 0 \, L \, q_2)\) & \((q_2 \, B \, B \, H \, q_F)\) \\
+    \end{tabular}
+\end{table}
+\end{problem}
+
+\begin{solution}
+    \begin{enumerate}
+        \item 如果工作带上的信息为 B10100010B ，读写头对准最右边第一个为 0 的单元:
+
+              \begin{longtable}{cccc}
+                  \hline
+                  \textbf{当前状态} & \textbf{当前字符} & \textbf{输出字符} & \textbf{下一状态} \\
+                  \hline
+                  \(q_0\)       & 0             & 1             & \(q_1\)       \\
+                  \(q_1\)       & 1             & 1             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 1             & 1             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 1             & 1             & \(q_1\)       \\
+                  \(q_1\)       & B             & B             & \(q_F\)       \\
+              \end{longtable}
+              得到的结果为 11000101B
+
+        \item 如果工作带上的信息为 B10100011B ，读写头对准右边第一个为 1 的单元:
+              \begin{longtable}{cccc}
+                  \hline
+                  \textbf{当前状态} & \textbf{当前字符} & \textbf{输出字符} & \textbf{下一状态} \\
+                  \hline
+                  \(q_0\)       & 1             & 0             & \(q_2\)       \\
+                  \(q_2\)       & 1             & 0             & \(q_2\)       \\
+                  \(q_2\)       & 0             & 1             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 1             & 1             & \(q_1\)       \\
+                  \(q_1\)       & 0             & 0             & \(q_1\)       \\
+                  \(q_1\)       & 1             & 1             & \(q_1\)       \\
+                  \(q_1\)       & B             & B             & \(q_F\)       \\
+              \end{longtable}
+              得到的结果为 00100101B
+
+    \end{enumerate}
+\end{solution}
+\end{document}

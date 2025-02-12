@@ -1,0 +1,94 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+
+\begin{problem}
+\begin{equation*}
+    \max Z = 10x_1-5x_2+x_3
+\end{equation*}
+\begin{align*}
+     & 5x_1+3x_2+x_3    =10               \\
+     & -5x_1+x_2-10x_3  \leq 15           \\
+     & x_j              \geq 0, j = 1,2,3
+\end{align*}
+\end{problem}
+
+\begin{solution}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|cccccc}
+
+               &             & 10      & -5      & 1       & 0       & -M      &       \\
+               &             & \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(x_5\) & \(b\) \\
+            \hline
+            -M & \(x_5\)     & 5       & 3       & 1       & 0       & 1       & 10    \\
+            0  & \(x_4\)     & -5      & 1       & -10     & 1       & 0       & 15    \\
+               & \(\lambda\) & 10+5M   & 3M-5    & M+1     & 0       & 0       & 10M   \\
+            \hline
+            10 & \(x_1\)     & 1       & 3/5     & 1/5     & 0       &         & 2     \\
+            0  & \(x_4\)     & 0       & 4       & -9      & 1       &         & 25    \\
+               & \(\lambda\) & 0       & -11     & -1      & 0       &         & -20   \\
+            \hline
+        \end{tabular}
+    \end{table}
+    最优解为  \(x_1 = 2, x_2 = 0, x_3 = 0, x_4 = 25 , Z = 20\)
+\end{solution}
+\newpage
+\begin{problem}
+\begin{equation*}
+    \min Z = 5x_1-6x_2-7x_3
+\end{equation*}
+\begin{align*}
+     & x_1+5x_2-3x_3    \geq 15           \\
+     & 5x_1-6x_2-10x_3  \leq 20           \\
+     & x_1+x_2+x_3      = 5               \\
+     & x_j              \geq 0, j = 1,2,3 \\
+\end{align*}
+\end{problem}
+\begin{solution}
+    \begin{equation*}
+        \min Y = x_6+x_7
+    \end{equation*}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|cccccccc}
+
+              &             & 0       & 0       & 0       & 0       & 0       & 1       & 1       &       \\
+              &             & \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(x_5\) & \(x_6\) & \(x_7\) & \(b\) \\
+            1 & \(x_6\)     & 1       & 5       & -3      & -1      & 0       & 1       & 0       & 15    \\
+            0 & \(x_5\)     & 5       & -6      & 10      & 0       & 1       & 0       & 0       & 10    \\
+            0 & \(x_7\)     & 1       & 1       & 1       & 0       & 0       & 0       & 1       & 5     \\
+              & \(\lambda\) & -2      & -6      & 2       & 1       & 0       & 0       & 0       & -20   \\
+            \hline
+            0 & \(x_2\)     & 1/5     & 1       & -3/5    & -1/5    & 0       &         & 0       & 3     \\
+            0 & \(x_5\)     & 31/5    & 0       & 32/5    & -6/5    & 1       &         & 0       & 38    \\
+            1 & \(x_7\)     & 4/5     & 0       & 8/5     & 1/5     & 0       &         & 1       & 2     \\
+              & \(\lambda\) & -4/5    & 0       & -8/5    & -1/5    & 0       &         & 1       & -2    \\
+            \hline
+            0 & \(x_2\)     & 1/2     & 1       & 0       & 0       & 0       &         &         & 15/4  \\
+            0 & \(x_5\)     & 3       & 0       & 0       & -2      & 1       &         &         & 33    \\
+            0 & \(x_3\)     & 1/2     & 0       & 1       & 1/8     & 0       &         &         & 5/4   \\
+              & \(\lambda\) & 0       & 0       & 0       & 0       &         &         &         & 0     \\
+        \end{tabular}
+    \end{table}
+    原方程
+    \begin{equation*}
+        \min Z = 5x_1-6x_2-7x_3
+    \end{equation*}
+    有解
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{c|c|cccccc}
+
+               &             & 5       & -6      & -7      & 0       & 0       &       \\
+               &             & \(x_1\) & \(x_2\) & \(x_3\) & \(x_4\) & \(x_5\) & \(b\) \\
+            \hline
+            -6 & \(x_2\)     & 1/2     & 1       & 0       & 0       & 0       & 15/4  \\
+            0  & \(x_5\)     & 3       & 0       & 0       & -2      & 1       & 33    \\
+            -7 & \(x_3\)     & 1/2     & 0       & 1       & 1/8     & 0       & 5/4   \\
+               & \(\lambda\) & 23/2    & 0       & 0       & 7/8     & 0       & 125/4 \\
+        \end{tabular}
+    \end{table}
+    最优解为  \(x_1 = 0, x_2 = 15/4, x_3 = 5/4, Z = -125/4\)
+\end{solution}
+\end{document}

@@ -1,0 +1,151 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{Default}=[circle, draw, thick]
+\tikzstyle{Highlight}=[circle, draw, thick, red]
+
+\begin{problem}
+    给定一个树塔, 如下图所示.
+    在此树塔中, 从顶部出发, 可以选择向左走还是向右走, 一直走到最低层. 
+    请找出一条路径, 使得路径上的数值和最大, 并给出该数值和.
+\end{problem}
+\begin{center}
+\begin{tikzpicture}
+\node[Default] (A) at ( 0 , 0 ) {19};
+\node[Default] (B) at ( 2 , 0 ) { 7};
+\node[Default] (C) at ( 4 , 0 ) {10};
+\node[Default] (D) at ( 6 , 0 ) { 4};
+\node[Default] (E) at ( 8 , 0 ) {16};
+
+\node[Default] (F) at ( 1, 1) { 2};
+\node[Default] (G) at ( 3, 1) {18};
+\node[Default] (H) at ( 5, 1) { 9};
+\node[Default] (I) at ( 7, 1) { 5};
+
+\node[Default] (J) at ( 2, 2) {10};
+\node[Default] (K) at ( 4, 2) { 6};
+\node[Default] (L) at ( 6, 2) { 8};
+
+\node[Default] (M) at ( 3, 3) {12};
+\node[Default] (N) at ( 5, 3) {15};
+
+\node[Default] (O) at ( 4, 4) { 9};
+\draw(F) -- (A);
+\draw(F) -- (B);
+\draw(G) -- (B);
+\draw(G) -- (C);
+\draw(H) -- (C);
+\draw(H) -- (D);
+\draw(I) -- (D);
+\draw(I) -- (E);
+
+
+\draw(J) -- (F);
+\draw(J) -- (G);
+\draw(K) -- (G);
+\draw(K) -- (H);
+\draw(L) -- (H);
+\draw(L) -- (I);
+
+\draw(M) -- (J);
+\draw(M) -- (K);
+\draw(N) -- (K);
+\draw(N) -- (L);
+
+\draw(O) -- (M);
+\draw(O) -- (N);
+
+\end{tikzpicture}
+\end{center}
+
+\begin{solution}
+定义状态$dp[i][j]$表示从顶部到第$i$层, 选择第$j$个节点时的最大路径和.
+注意到从顶点出发时到底是向左走还是向右走, 取决于向左走能取得最大值还是向右走能取得最大值.
+因此, 可以得到状态转移方程如下:
+\begin{equation*}
+    dp[1][1] = max(dp[2][1], dp[2][2]) + 19
+\end{equation*}
+而对于\(dp[2][1]\), 也是同样的道理, 有:
+\begin{equation*}
+    dp[2][1] = max(dp[3][1], dp[3][2]) + 7
+\end{equation*}
+以此类推, 可以得到状态转移方程如下:
+\begin{equation*}
+    dp[i][j] = max(dp[i+1][j], dp[i+1][j+1]) + a[i][j]
+\end{equation*}
+在最后一层时, 可以直接得到最大路径和为$dp[5][j]$. 即:
+\begin{equation*}
+    dp[i][j] =
+    \left\{
+    \begin{aligned}
+        & max(dp[i+1][j], dp[i+1][j+1]) + a[i][j] i \neq 5\\
+        & a[i][j] , i=5
+    \end{aligned}
+    \right.
+\end{equation*}
+\(dp[i][j]\)对应的表格如下:
+\begin{table}[ht!]
+  \begin{center}
+    \begin{tabular}{c|c|c|c|c|c} 
+    \(dp[i][j]\) &  1 &  2 &  3 &  4 & 5 \\ \hline
+    1            & 59 &  - &  - &  - & - \\ \hline
+    2            & 50 & 49 &  - &  - & - \\ \hline
+    3            & 38 & 34 & 29 &  - & - \\ \hline
+    4            & 21 & 28 & 19 & 21 & - \\ \hline
+    5            & 19 &  7 & 10 &  4 & 16\\ 
+    \end{tabular}
+  \end{center}
+\end{table}
+\newpage
+容易得出最大路径和为$59$,其路径为:$9 \rightarrow 12 \rightarrow 10 \rightarrow 18 \rightarrow 10$.
+即:
+\begin{center}
+\begin{tikzpicture}
+\node[Default] (A) at ( 0 , 0 ) {19};
+\node[Default] (B) at ( 2 , 0 ) { 7};
+\node[Highlight] (C) at ( 4 , 0 ) {10};
+\node[Default] (D) at ( 6 , 0 ) { 4};
+\node[Default] (E) at ( 8 , 0 ) {16};
+
+\node[Default] (F) at ( 1, 1) { 2};
+\node[Highlight] (G) at ( 3, 1) {18};
+\node[Default] (H) at ( 5, 1) { 9};
+\node[Default] (I) at ( 7, 1) { 5};
+
+\node[Highlight] (J) at ( 2, 2) {10};
+\node[Default] (K) at ( 4, 2) { 6};
+\node[Default] (L) at ( 6, 2) { 8};
+
+\node[Highlight] (M) at ( 3, 3) {12};
+\node[Default] (N) at ( 5, 3) {15};
+
+\node[Highlight] (O) at ( 4, 4) { 9};
+\draw(F) -- (A);
+\draw(F) -- (B);
+\draw(G) -- (B);
+\draw(G) -- (C)[Highlight];
+\draw(H) -- (C);
+\draw(H) -- (D);
+\draw(I) -- (D);
+\draw(I) -- (E);
+
+
+\draw(J) -- (F);
+\draw(J) -- (G)[Highlight];
+\draw(K) -- (G);
+\draw(K) -- (H);
+\draw(L) -- (H);
+\draw(L) -- (I);
+
+\draw(M) -- (J)[Highlight];
+\draw(M) -- (K);
+\draw(N) -- (K);
+\draw(N) -- (L);
+
+\draw(O) -- (M)[Highlight];
+\draw(O) -- (N);
+
+\end{tikzpicture}
+\end{center}
+\end{solution}
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{Node_Default}=[circle, draw, thick]
+\tikzstyle{Node_Highlight}=[circle, draw, thick, red]
+\tikzstyle{Edge_Default}=[->, thick]
+\tikzstyle{Edge_Highlight}=[->, thick, red]
+
+\begin{problem}
+    用向前递推方法求解下面的四段图问题:
+\end{problem}
+\begin{center}
+\begin{tikzpicture}
+\node[ ]            (J) at ( 0 , 8 ) {\(v_1\)};
+\node[Node_Default] (A) at ( 0 , 3 ) {1};
+
+\node[ ]            (K) at ( 4 , 8 ) {\(v_2\)};
+\node[Node_Default] (2) at ( 4 , 6 ) {2};
+\node[Node_Default] (3) at ( 4 , 4 ) {3};
+\node[Node_Default] (4) at ( 4 , 2 ) {4};
+\node[Node_Default] (5) at ( 4 , 0 ) {5};
+
+\node[ ]            (L) at ( 8 , 8 ) {\(v_3\)};
+\node[Node_Default] (6) at ( 8 , 5 ) {6};
+\node[Node_Default] (7) at ( 8 , 3 ) {7};
+\node[Node_Default] (8) at ( 8 , 1 ) {8};
+
+\node[ ]            (M) at ( 12 , 8 ) {\(v_4\)};
+\node[Node_Default] (9) at ( 12, 3) {9};
+
+ 
+\draw[Edge_Default] (A) -- (2) node[midway, above] {9};
+\draw[Edge_Default] (A) -- (3) node[midway, above] {7};
+\draw[Edge_Default] (A) -- (4) node[midway, above] {3};
+\draw[Edge_Default] (A) -- (5) node[midway, above] {2};
+
+\draw[Edge_Default] (2) -- (6) node[midway, above] {4};
+\draw[Edge_Default] (2) -- (7) node[pos=0.2, above] {2};
+\draw[Edge_Default] (2) -- (8) node[pos=0.1, below] {1};
+
+\draw[Edge_Default] (3) -- (6) node[pos=0.8, above] {3};
+\draw[Edge_Default] (3) -- (7) node[pos=0.8, below] {7};
+
+\draw[Edge_Default] (4) -- (8) node[pos=0.3, above] {11};
+
+\draw[Edge_Default] (5) -- (7) node[pos=0.3, above] {11};
+\draw[Edge_Default] (5) -- (8) node[midway, above] {8};
+
+\draw[Edge_Default] (6) -- (9) node[midway, above] {5};
+\draw[Edge_Default] (7) -- (9) node[midway, above] {3};
+\draw[Edge_Default] (8) -- (9) node[midway, above] {5};
+
+\end{tikzpicture}
+\end{center}
+
+\begin{solution}
+向前递推式为:
+\begin{equation*}
+    COST(i,j) = \min_{k} \{ COST(i+1,l) + c{(j,l)} \}
+\end{equation*}
+以此计算得到下递推的结果:
+\begin{align*}
+    COST(3,6) &= c(6,9) = 5 \\
+    COST(3,7) &= c(7,9) = 3 \\
+    COST(3,8) &= c(8,9) = 5 \\
+\end{align*}
+\begin{align*}
+    COST(2,2) &= \min \{ COST(3,6) + 4, COST(3,7) +  2, COST(3,8) +  1 \} &&= \min \{ 9, 5, 6\} &&=  5 \\
+    COST(2,3) &= \min \{ COST(3,6) + 3, COST(3,7) +  7                 \} &&= \min \{ 8,10   \} &&=  8 \\
+    COST(2,4) &= \min \{                                COST(3,8) + 11 \} &&= \min \{16      \} &&= 16 \\
+    COST(2,5) &= \min \{                COST(3,7) + 11, COST(3,8) +  8 \} &&= \min \{14,13   \} &&= 13 \\
+\end{align*}
+\begin{align*}
+    COST(1,1) &= \min \{ COST(2,2) + 9, COST(2,3) + 7, COST(2,4) + 3, COST(2,5) + 2 \} \\
+              &= \min \{14,15,19,15\} = 14
+\end{align*}
+因此最小代价为14,路径为\(1 \rightarrow 2 \rightarrow 7 \rightarrow 9\):
+\begin{center}
+\begin{tikzpicture}
+\node[ ]            (J) at ( 0 , 8 ) {\(v_1\)};
+\node[Node_Highlight] (A) at ( 0 , 3 ) {1};
+
+\node[ ]            (K) at ( 4 , 8 ) {\(v_2\)};
+\node[Node_Highlight] (2) at ( 4 , 6 ) {2};
+\node[Node_Default] (3) at ( 4 , 4 ) {3};
+\node[Node_Default] (4) at ( 4 , 2 ) {4};
+\node[Node_Default] (5) at ( 4 , 0 ) {5};
+
+\node[ ]            (L) at ( 8 , 8 ) {\(v_3\)};
+\node[Node_Default] (6) at ( 8 , 5 ) {6};
+\node[Node_Highlight] (7) at ( 8 , 3 ) {7};
+\node[Node_Default] (8) at ( 8 , 1 ) {8};
+
+\node[ ]            (M) at ( 12 , 8 ) {\(v_4\)};
+\node[Node_Highlight] (9) at ( 12, 3) {9};
+
+ 
+\draw[Edge_Highlight] (A) -- (2) node[midway, above] {9};
+\draw[Edge_Default] (A) -- (3) node[midway, above] {7};
+\draw[Edge_Default] (A) -- (4) node[midway, above] {3};
+\draw[Edge_Default] (A) -- (5) node[midway, above] {2};
+
+\draw[Edge_Default] (2) -- (6) node[midway, above] {4};
+\draw[Edge_Highlight] (2) -- (7) node[pos=0.2, above] {2};
+\draw[Edge_Default] (2) -- (8) node[pos=0.1, below] {1};
+
+\draw[Edge_Default] (3) -- (6) node[pos=0.8, above] {3};
+\draw[Edge_Default] (3) -- (7) node[pos=0.8, below] {7};
+
+\draw[Edge_Default] (4) -- (8) node[pos=0.3, above] {11};
+
+\draw[Edge_Default] (5) -- (7) node[pos=0.3, above] {11};
+\draw[Edge_Default] (5) -- (8) node[midway, above] {8};
+
+\draw[Edge_Default] (6) -- (9) node[midway, above] {5};
+\draw[Edge_Highlight] (7) -- (9) node[midway, above] {3};
+\draw[Edge_Default] (8) -- (9) node[midway, above] {5};
+
+\end{tikzpicture}
+\end{center}
+
+\end{solution}
+\end{document}

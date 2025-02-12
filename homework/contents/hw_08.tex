@@ -1,0 +1,58 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+对下面的三组数据进行快速排序
+\begin{itemize}
+\item \verb|[45,36,18,53,72,30,48,93,15,36]|
+\item \verb|[1,1,1,1,1]|
+\item \verb|[5,5,8,3,4,3,2]|
+\end{itemize}
+给出每一次划分后的结果。
+\end{problem}
+\begin{solution}
+    小括号包围的数字表示当前划分的基准元素，基准元素左侧为小于基准的元素, 基准元素选择当前分组的第一个元素。
+\begin{itemize}
+\item \verb|[45,36,18,53,72,30,48,93,15,36]|
+
+    $\quad$       \verb|[ 45 , 36 , 18 , 53 , 72 , 30 , 48 , 93 , 15 , 36 ]|
+
+    $\rightarrow$ \verb|[ 30 , 36 , 18 , 36 , 15 ,(45), 48 , 93 , 72 , 53 ]|
+
+    $\rightarrow$ \verb|[ 18 , 15 ,(30), 36 , 36 ,(45),(48), 93 , 72 , 53 ]|
+
+    $\rightarrow$ \verb|[(15),(18),(30),(36),(36),(45),(48), 72 , 53 ,(93)]|
+
+    $\rightarrow$ \verb|[(15),(18),(30),(36),(36),(45),(48),(53),(72),(93)]|
+
+
+\item \verb|[1,1,1,1,1]|
+
+    $\quad$       \verb|[ 1 , 1 , 1 , 1 , 1 ]| 
+
+    $\rightarrow$ \verb|[(1), 1 , 1 , 1 , 1 ]|
+
+    $\rightarrow$ \verb|[(1),(1), 1 , 1 , 1 ]|
+
+    $\rightarrow$ \verb|[(1),(1),(1), 1 , 1 ]|
+
+    $\rightarrow$ \verb|[(1),(1),(1),(1), 1 ]|
+
+    $\rightarrow$ \verb|[(1),(1),(1),(1),(1)]|
+
+
+\item \verb|[5,5,8,3,4,3,2]|
+
+    $\quad$       \verb|[ 5 , 5 , 8 , 3 , 4 , 3 , 2 ]|
+
+    $\rightarrow$ \verb|[ 4 , 2 , 3 , 3 ,(5), 8 , 5 ]|
+
+    $\rightarrow$ \verb|[ 3 , 2 , 3 ,(4),(5), 5 ,(8)]|
+
+    $\rightarrow$ \verb|[ 2 ,(3), 3 ,(4),(5),(5),(8)]|
+
+    $\rightarrow$ \verb|[(2),(3),(3),(4),(5),(5),(8)]|
+
+\end{itemize}
+\end{solution}
+\end{document}

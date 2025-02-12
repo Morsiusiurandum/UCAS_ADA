@@ -1,0 +1,108 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+\begin{equation*}
+    \max Z = 5x_1+8x_2+7x_3+4x_4
+\end{equation*}
+\begin{equation*}
+    \left\{
+    \begin{aligned}
+         & x_1+x_2+x_3+x_4\leq 4    \\
+         & 2x_1+x_2+3x_3+2x_4\leq 8 \\
+         & x_1,x_2,x_3,x_4\geq 0
+    \end{aligned}
+    \right.
+\end{equation*}
+\end{problem}
+\begin{solution}
+    \begin{enumerate}
+        \item 最优解
+              \begin{equation*}
+                  X_B = B^{-1}b =
+                  \begin{bmatrix}
+                      2 & 5 \\
+                      2 & 3
+                  \end{bmatrix}^{-1}
+                  \begin{bmatrix}
+                      30 \\
+                      20
+                  \end{bmatrix}
+                  =
+                  \begin{bmatrix}
+                      2.5 \\
+                      5   \\
+                  \end{bmatrix}
+              \end{equation*}
+        \item 单纯形乘子
+              \begin{equation*}
+                  \pi = C_B B^{-1} =
+                  \begin{bmatrix}
+                      4 & 8
+                  \end{bmatrix}
+                  \begin{bmatrix}
+                      2 & 5 \\
+                      2 & 3
+                  \end{bmatrix}^{-1}
+                  =
+                  \begin{bmatrix}
+                      1 & 1
+                  \end{bmatrix}
+              \end{equation*}
+        \item \(\bar{N}_1,\bar{N}_3\)
+              \begin{equation*}
+                  \bar{N} = B^{-1}N =
+                  \begin{bmatrix}
+                      2 & 5 \\
+                      2 & 3
+                  \end{bmatrix}^{-1}
+                  \begin{bmatrix}
+                      3 & 4 & 0 & 1 \\
+                      2 & 3 & 1 & 0
+                  \end{bmatrix}
+                  =
+                  \begin{bmatrix}
+                      0.25 & 0.75 & 1.25 & -0.75 \\
+                      0.5  & 0.5  & -0.5 & 0.5   \\
+                  \end{bmatrix}
+              \end{equation*}
+              \begin{equation*}
+                  \bar{N}_1 = \begin{bmatrix}
+                      0.25 \\
+                      0.5
+                  \end{bmatrix}
+                  ,\quad
+                  \bar{N}_3 = \begin{bmatrix}
+                      0.75 \\
+                      0.5
+                  \end{bmatrix}
+              \end{equation*}
+        \item \(\lambda_1,\lambda_3\)
+              \begin{equation*}
+                  \lambda_N = C_N - C_BB^{-1}N =
+                  \begin{bmatrix}
+                      5 & 7 & 0 & 0
+                  \end{bmatrix}
+                  -
+                  \begin{bmatrix}
+                      4 & 8
+                  \end{bmatrix}
+                  \begin{bmatrix}
+                      2 & 5 \\
+                      2 & 3
+                  \end{bmatrix}^{-1}
+                  \begin{bmatrix}
+                      3 & 4 & 0 & 1 \\
+                      2 & 3 & 1 & 0
+                  \end{bmatrix}
+                  =
+                  \begin{bmatrix}
+                      0 & 0 & -1 & -1
+                  \end{bmatrix}
+              \end{equation*}
+              \begin{equation*}
+                  \lambda_1 = \lambda_3 = 0
+              \end{equation*}
+    \end{enumerate}
+\end{solution}
+\end{document}

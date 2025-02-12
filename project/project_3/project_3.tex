@@ -1,0 +1,56 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\begin{problem}
+\textbf{删数问题}
+通过键盘输入一个高精度的正整数 n (n 的有效位数 ≤ 240),
+去掉其中任意 s 个数字后, 剩下的数字按原左右次序将组成一个新的正整数.编程对给定的 n 和 s,
+寻找一种方案, 使得剩下的数字组成的新数最小.
+\end{problem}
+
+\begin{solution}
+    每一步总是选择一个使剩下的数最小的数字删去:
+    即按高位到低位的顺序搜索，若各位数字递增，则删除最后一个数字，
+    否则删除第一个递减区间的首字符，这样删一位便形成了一个新数字串。
+    然后回到数字串首，按上述规则再删下一个数字。
+    重复以上过程s次, 剩下的数字串便是问题的解.
+    算法具体操作如下:
+
+
+    \begin{algorithm}
+        \caption{删除数字以获得最小数}
+        \label{alg:getMinNumber}
+        \begin{algorithmic}[1]
+            \State \textbf{Input:} 字符串 \texttt{number}, 整数 \texttt{digitsToRemove}
+            \State \textbf{Output:} 最小可能的数字
+            \While{\texttt{digitsToRemove} > 0}
+            \State 找到第一个比后一个大的数字位置 \texttt{pos}
+            \State 删除 \texttt{number[pos]}
+            \State \texttt{digitsToRemove} $\gets$ \texttt{digitsToRemove - 1}
+            \EndWhile
+            \State 删除前导零
+            \If{\texttt{number}为空}
+            \State \Return \texttt{"0"}
+            \Else
+            \State \Return \texttt{number}
+            \EndIf
+        \end{algorithmic}
+    \end{algorithm}
+
+
+    输入输出如下:
+    \begin{figure}[htb]
+        \centering
+        \includegraphics[width=450pt]{figure/Figure_1.png}
+        \caption{输入输出示例}
+    \end{figure}
+    \newpage
+    该算法完整代码如下:
+    \inputminted[
+        frame=lines,
+        framesep=2mm,
+        baselinestretch=1.2,
+        fontsize=\footnotesize
+    ]{cpp}{project/project_3/src/main.cpp}
+\end{solution}
+\end{document}

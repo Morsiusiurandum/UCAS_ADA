@@ -1,0 +1,57 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+
+\begin{problem}
+利用贪心策略求解下列背包问题
+题设:
+
+\(n=4,M=54\)
+
+\((P_1,P_2,P_3,P_4)=(20,16,10,18)\)
+
+\((w_1,w_2,w_3,w_4)=(16,12,15,24)\)
+
+求解向量\(X\),计算\(\sum P_ix_i\)
+\end{problem}
+\begin{solution}
+    物品的单位重量:
+    \begin{itemize}
+    \item 物品 1: \( \frac{P_1}{w_1} = \frac{20}{16} = 1.25 \)
+    \item 物品 2: \( \frac{P_2}{w_2} = \frac{16}{12} = 1.33 \)
+    \item 物品 3: \( \frac{P_3}{w_3} = \frac{10}{15} = 0.67 \)
+    \item 物品 4: \( \frac{P_4}{w_4} = \frac{18}{24} = 0.75 \) 
+    \end{itemize}
+
+    按照单位重量从大到小选择:
+
+    选择物品 2:重量为 12,剩余容量为 \( 54 - 12 = 42 \)
+
+    选择物品 1:重量为 16,剩余容量为 \( 42 - 16 = 26 \)
+
+    选择物品 4:重量为 24,剩余容量为 \( 26 - 24 = 2 \)
+
+    由于物品3的重量为 15,已经超过剩余容量 2,因此物品 3 放入一部分\(\frac{2}{15}\)。
+    
+    对应的解向量为:
+    \[
+    X = \begin{bmatrix}
+    1 \\
+    1 \\
+    \frac{2}{15} \\
+    1
+    \end{bmatrix}
+    \]
+    \[
+    \begin{aligned}
+    \sum P_i x_i 
+    &= P_1 \cdot x_1 + P_2 \cdot x_2 + P_3 \cdot x_3 + P_4 \cdot x_4\\
+    &= 20 \times 1 + 16 \times 1 + 10 \times \frac{2}{15} + 18 \times 1 \\
+    &= 20 + 16 + 1.33 + 18 = 55.33
+    \end{aligned}
+    \]
+
+    ~\\
+    解向量 \(X = (1, 1, 0, 1)\),\( \sum P_i x_i = 55.33 \)
+\end{solution}
+\end{document}

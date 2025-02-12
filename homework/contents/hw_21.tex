@@ -1,0 +1,36 @@
+\documentclass[../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{Node_Default}=[circle, draw, thick]
+\tikzstyle{Edge_Default}=[->, thick]
+\begin{problem}
+    用序偶的方式求0/1背包问题.
+    \begin{align*}
+        n &= 4, \\
+        (w_1, w_2, w_3, w_4) &= (5, 3, 4, 7), \\
+        (v_1, v_2, v_3, v_4) &= (3, 2, 5, 9), \\
+        M &= 15.
+    \end{align*}
+\end{problem}
+\begin{solution}
+\begin{align*}
+    S^0 &= \{(0,0)\} \rightarrow (p,w) = (3,5)  \\
+     &\rightarrow S^1_1 = \{(3,5)\} \\
+    S^1 &= \{(0,0), (3,5)\} \rightarrow (p,w) = (2,3) \\ 
+    &\rightarrow S^1_2 = \{(2,3),(5,8)\} \\
+    S^2 &= \{(0,0), (2,3), (3,5),(5,8)\} \rightarrow (p,w) = (5,4) \\ 
+    &\rightarrow S^1_3 = \{(5,4),(7,7),(8,9),(10,12)\} \\
+    S^3 &= \{(0,0), (2,3), (5,4), (7,7), (8,9), (10,12)\} \rightarrow (p,w) = (9,7) \\
+     &\rightarrow S^1_4 = \{(9,7),(11,10),(14,11),(16,14),(17,16),(19,19)\} \\
+    S^4 &= \{(0,0), (2,3), (5,4), (9,7), (11,10), (14,11), (16,14)\} \\
+\end{align*}
+其中:
+\begin{align*}
+    &S^4 \text{中} (16,14) \in S^1_4 &&\text{且} (16,14)-(9,7) = (7,7) \\ 
+    &S^3 \text{中} (7,7) \in S^1_3 &&\text{且} (7,7)-(5,4) = (2,3) \\
+    &S^2 \text{中} (2,3) \in S^1_2 &&\text{且} (2,3)-(2,3) = (0,0) \\
+    &S^1 \text{中} (0,0) \in S^0 .
+\end{align*}
+因此\(X_n = \{0,1,1,1\}\).
+\end{solution}
+\end{document}

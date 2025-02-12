@@ -1,0 +1,101 @@
+\documentclass[../../main.tex]{subfiles}
+\begin{document}
+
+\tikzstyle{State}=[circle, draw, thick]
+
+\begin{problem}
+\begin{itemize}
+    \item [(1)] 利用 prim 算法，求下面无向图的最小生成树。
+    \item [(2)] 利用 Kruskal 算法，求下面无向图的最小生成树。
+    \item [(3)] 利用破圈法，求下面无向图的最小生成树。
+\end{itemize}
+\end{problem}
+\begin{center}
+\begin{tikzpicture}
+% Nodes
+\node[State] (A) at ( 0  , 3) {A};
+\node[State] (B) at (-1.5, 2) {B};
+\node[State] (C) at ( 0  , 1) {C};
+\node[State] (D) at ( 1.5, 2) {D};
+\node[State] (E) at (-1.5, 0) {E};
+\node[State] (F) at ( 1.5, 0) {F};
+% Edges with weights
+\draw[thick] (A) -- (B) node[midway, above left]  {6};
+\draw[thick] (A) -- (C) node[midway, right]       {1};
+\draw[thick] (A) -- (D) node[midway, above right] {5};
+\draw[thick] (B) -- (C) node[midway, above right] {5};
+\draw[thick] (B) -- (E) node[midway, left]        {3};
+\draw[thick] (C) -- (E) node[midway, above left]  {6};
+\draw[thick] (C) -- (D) node[midway, above left]  {5};
+\draw[thick] (C) -- (F) node[midway, above right] {4};
+\draw[thick] (D) -- (F) node[midway, right]       {2}; 
+\draw[thick] (E) -- (F) node[midway, below]       {6};
+\end{tikzpicture}
+\end{center}
+
+\begin{solution}
+\begin{itemize}
+    \item [(1)] 利用 prim 算法，求下面无向图的最小生成树。
+    
+    从 A 开始选择: A-C, C-F, D-F, C-B, B-E
+    \begin{center}
+    \begin{tikzpicture}
+    % Nodes
+    \node[State] (A) at ( 0  , 3) {A};
+    \node[State] (B) at (-1.5, 2) {B};
+    \node[State] (C) at ( 0  , 1) {C};
+    \node[State] (D) at ( 1.5, 2) {D};
+    \node[State] (E) at (-1.5, 0) {E};
+    \node[State] (F) at ( 1.5, 0) {F};
+    % Edges with weights
+    \draw[thick] (A) -- (C) node[midway, right]       {1};
+    \draw[thick] (C) -- (F) node[midway, above right] {4};
+    \draw[thick] (D) -- (F) node[midway, right]       {2}; 
+    \draw[thick] (B) -- (C) node[midway, above right] {5};
+    \draw[thick] (B) -- (E) node[midway, left]        {3};
+    \end{tikzpicture}
+    \end{center}
+    \item [(2)] 利用 Kruskal 算法，求下面无向图的最小生成树。
+    
+    从小到大选择: A-C, D-F, B-E, C-F, B-C
+    \begin{center}
+    \begin{tikzpicture}
+    % Nodes
+    \node[State] (A) at ( 0  , 3) {A};
+    \node[State] (B) at (-1.5, 2) {B};
+    \node[State] (C) at ( 0  , 1) {C};
+    \node[State] (D) at ( 1.5, 2) {D};
+    \node[State] (E) at (-1.5, 0) {E};
+    \node[State] (F) at ( 1.5, 0) {F};
+    % Edges with weights
+    \draw[thick] (A) -- (C) node[midway, right]       {1};
+    \draw[thick] (D) -- (F) node[midway, right]       {2}; 
+    \draw[thick] (B) -- (E) node[midway, left]        {3};
+    \draw[thick] (C) -- (F) node[midway, above right] {4};
+    \draw[thick] (B) -- (C) node[midway, above right] {5};
+    \end{tikzpicture}
+    \end{center}
+    \item [(3)] 利用破圈法，求下面无向图的最小生成树。
+    
+    按照顺序将以下边移除: A-D, A-B, C-E, E-F, C-D
+    \begin{center}
+    \begin{tikzpicture}
+    % Nodes
+    \node[State] (A) at ( 0  , 3) {A};
+    \node[State] (B) at (-1.5, 2) {B};
+    \node[State] (C) at ( 0  , 1) {C};
+    \node[State] (D) at ( 1.5, 2) {D};
+    \node[State] (E) at (-1.5, 0) {E};
+    \node[State] (F) at ( 1.5, 0) {F};
+    % Edges with weights
+    \draw[thick] (A) -- (C) node[midway, right]       {1};
+    \draw[thick] (B) -- (C) node[midway, above right] {5};
+    \draw[thick] (B) -- (E) node[midway, left]        {3};
+    \draw[thick] (C) -- (F) node[midway, above right] {4};
+    \draw[thick] (D) -- (F) node[midway, right]       {2}; 
+    \end{tikzpicture}
+    \end{center}
+\end{itemize}
+\end{solution}
+
+\end{document}
